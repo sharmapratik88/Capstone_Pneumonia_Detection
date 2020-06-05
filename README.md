@@ -1,1 +1,1 @@
-# RSNA Pneumonia_Detection Detection - Capstone Project
+## RSNA Pneumonia Detection Detection - Capstone Project

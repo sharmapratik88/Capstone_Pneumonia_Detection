@@ -14,7 +14,6 @@ def plot_dicom_images(data, train_class):
       path = os.path.join('stage_2_train_images/', image)
       data = dcm.read_file(path)
       rows = train_class[train_class['patientId'] == row['patientId']]
-      
       age = rows.PatientAge.unique().tolist()[0]
       sex = data.PatientSex
       part = data.BodyPartExamined
@@ -50,3 +49,28 @@ def get_tags(data, path):
         data.loc[idx,'BodyPartExamined'] = img_data.BodyPartExamined
         data.loc[idx,'ViewPosition'] = img_data.ViewPosition
         data.loc[idx,'Modality'] = img_data.Modality
+
+# Helper function to plot bboxes scatter
+# Reference for this function & plots: https://www.kaggle.com/gpreda/rsna-pneumonia-detection-eda
+def bboxes_scatter(df1, df2, text1, text2):
+  fig, (ax1, ax2) = plt.subplots(1, 2, figsize = (15, 7.2))
+  fig.subplots_adjust(top = 0.85)
+  fig.suptitle('Plotting centers of lung opacity\n{} & {}'.format(text1, text2))
+  df1.plot.scatter(x = 'xw', y = 'yh', ax = ax1, alpha = 0.8, marker = '.', 
+                   xlim = (0, 1024), ylim = (0, 1024), color = 'green')
+  ax1.set_title('Centers of Lung Opacity\n{}'.format(text1))
+  for i, row in df1.iterrows():
+    ax1.add_patch(Rectangle(xy = (row['x'], row['y']),
+                            width = row['width'], height = row['height'], 
+                            alpha = 3.5e-3, color = 'yellow'))
+      
+  plt.title('Centers of Lung Opacity\n{}'.format(text2))
+  df2.plot.scatter(x = 'xw', y = 'yh', ax = ax2, alpha = 0.8, marker = '.',
+                   color = 'brown',  xlim = (0, 1024), ylim = (0, 1024))
+  ax2.set_title('Centers of Lung Opacity\n{}'.format(text2))
+  for i, row in df2.iterrows():
+    ax2.add_patch(Rectangle(xy = (row['x'], row['y']),
+                             width = row['width'], height = row['height'],
+                             alpha = 3.5e-3, 
+                             color = 'yellow'))
+  plt.show()

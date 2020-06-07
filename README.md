@@ -5,7 +5,7 @@ Capstone Project completed as a part of Great Learning's PGP - Artificial Intell
 The project is built on Google Colab Jupyter Notebook. Clone this repository to get started.
 ```
 $ git clone https://github.com/sharmapratik88/Capstone_Pneumonia_Detection.git
-$ cd AIML-Projects
+$ cd Capstone_Pneumonia_Detection
 ```
 
 ## 🤔 Problem Statement

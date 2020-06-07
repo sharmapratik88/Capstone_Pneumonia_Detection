@@ -6,14 +6,14 @@ import pandas as pd
 import os
 
 # Helper function to plot the dicom images
-def plot_dicom_images(data, train_class):
+def plot_dicom_images(data, df, img_path):
   img_data = list(data.T.to_dict().values())
   f, ax = plt.subplots(3, 3, figsize = (16, 18))
   for i, row in enumerate(img_data):
       image = row['patientId'] + '.dcm'
-      path = os.path.join('stage_2_train_images/', image)
+      path = os.path.join(img_path, image)
       data = dcm.read_file(path)
-      rows = train_class[train_class['patientId'] == row['patientId']]
+      rows = df[df['patientId'] == row['patientId']]
       age = rows.PatientAge.unique().tolist()[0]
       sex = data.PatientSex
       part = data.BodyPartExamined

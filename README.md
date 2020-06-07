@@ -2,10 +2,9 @@
 Capstone Project completed as a part of Great Learning's PGP - Artificial Intelligence and Machine Learning.
 
 ## 📁 Getting Started
-The project is built on Google Colab Jupyter Notebook. Clone this repository to get started.
+The project is built on Google Colab Jupyter Notebook. Clone this repository to get started. You can upload the cloned folder to your google drive.
 ```
 $ git clone https://github.com/sharmapratik88/Capstone_Pneumonia_Detection.git
-$ cd Capstone_Pneumonia_Detection
 ```
 
 ## 🤔 Problem Statement

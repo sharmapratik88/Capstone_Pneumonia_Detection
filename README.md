@@ -6,6 +6,7 @@ In this capstone project, the goal is to build a pneumonia detection system, to 
 
 ## 📜 Approach
 ### 📈 Step 1: Exploratory Data Analysis
+---
 * Understanding the data with a brief on train/test labels and respective class info
 * Look at the first five rows of both the csvs (train and test)
 * Identify how are classes and target distributed

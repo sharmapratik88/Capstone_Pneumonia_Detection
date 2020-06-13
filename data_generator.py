@@ -2,6 +2,8 @@
 import numpy as np, pandas as pd
 import os, random, pydicom, keras
 from skimage.transform import resize
+import matplotlib.pyplot as plt
+import cv2
 
 PATH = '/content/drive/My Drive/Pneumonia_Detection/'
 DATA_DIR = os.path.join(PATH + 'data/')
@@ -45,11 +47,11 @@ class generator(keras.utils.Sequence):
         fn = fn.split('.')[0]
         if fn in self.pneumonia_evidence:
             for loc in self.pneumonia_evidence[fn]:
-                x,y,w,h = loc
+                x, y, w, h = loc
                 msk[y:y+h, x:x+w] = 1
         img = resize(img, (self.image_size, self.image_size), mode = 'reflect')
         msk = resize(msk, (self.image_size, self.image_size), mode = 'reflect') > 0.5
-        if self.augment and random.random() >0.5:
+        if self.augment and random.random() > 0.5:
             img = np.fliplr(img)
             msk = np.fliplr(msk)
         img = np.expand_dims(img, -1)
@@ -58,7 +60,7 @@ class generator(keras.utils.Sequence):
 
     def __loadpredict__(self, fn):
         img = pydicom.dcmread(os.path.join(self.folder, fn)).pixel_array
-        img = resize(img, (self.image_size, self.image_size), mode='reflect')
+        img = resize(img, (self.image_size, self.image_size), mode = 'reflect')
         img = np.expand_dims(img, -1)
         return img
 
@@ -86,3 +88,33 @@ class generator(keras.utils.Sequence):
             return int(np.ceil(len(self.fns)/self.batch_size))
         else:
             return int(len(self.fns)/self.batch_size)
+
+# Function to plot masks that are generated using `generator` function above
+def plot_masks(df, path, image_fns, pneumonia_evidence):
+  sample_patient_id = random.choice(list(df.loc[(df['Target'] == 1), 'patientId']))
+  sample_fn = sample_patient_id + '.dcm'
+  sample_details = df.loc[df['patientId'] == sample_patient_id]
+
+  g = generator(path, image_fns, pneumonia_evidence)
+  img, msk = g.__load__(sample_fn)
+  fig, (ax1, ax2, ax3) = plt.subplots(1, 3, figsize = (15, 6))
+
+  _ = ax1.imshow(img[:,:,0], cmap = plt.cm.bone); _ = ax1.axis('off')
+  _ = ax2.imshow(msk[:,:,0]); _ = ax2.axis('off')
+  _ = ax3.imshow(cv2.bitwise_and(img, img, mask = msk.astype(np.uint8)), 
+                cmap = plt.cm.bone); _ = ax3.axis('off')
+
+  _ = ax1.set_title('{}\nAge: {}, Gender: {}, VP: {}\nSample Image'.format(sample_patient_id,
+                list(sample_details['PatientAge'].unique())[0], 
+                list(sample_details['PatientSex'].unique())[0],
+                list(sample_details['ViewPosition'].unique())[0]))
+  _ = ax2.set_title('{}\nAge: {}, Gender: {}, VP: {}\nMask for Sample Image'.format(sample_patient_id,
+                list(sample_details['PatientAge'].unique())[0], 
+                list(sample_details['PatientSex'].unique())[0],
+                list(sample_details['ViewPosition'].unique())[0]))
+  _ = ax3.set_title('{}\nAge: {}, Gender: {}, VP: {}\nMask overlay over Image'.format(sample_patient_id,
+                list(sample_details['PatientAge'].unique())[0], 
+                list(sample_details['PatientSex'].unique())[0],
+                list(sample_details['ViewPosition'].unique())[0]))
+  plt.subplots_adjust(top = 0.4)
+  plt.tight_layout()

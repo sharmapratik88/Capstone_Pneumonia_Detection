@@ -10,9 +10,9 @@ DATA_DIR = os.path.join(PATH + 'data/')
 
 if not os.path.exists(DATA_DIR): os.makedirs(DATA_DIR)
 
-def get_pneumonia_evidence():
+def get_pneumonia_evidence(filename):
     pneumonia_evidence = {}
-    df = pd.read_csv(DATA_DIR + 'stage_2_train_labels.csv')
+    df = pd.read_csv(DATA_DIR + filename)
 
     for _, row in df.iterrows():
         fn = row[0]

@@ -53,7 +53,7 @@ def get_tags(data, path):
 # Helper function to plot bboxes scatter
 # Reference for this function & plots: https://www.kaggle.com/gpreda/rsna-pneumonia-detection-eda
 def bboxes_scatter(df1, df2, text1, text2):
-  fig, (ax1, ax2) = plt.subplots(1, 2, figsize = (15, 7.2))
+  fig, (ax1, ax2) = plt.subplots(1, 2, figsize = (13, 8))
   fig.subplots_adjust(top = 0.85)
   fig.suptitle('Plotting centers of lung opacity\n{} & {}'.format(text1, text2))
   df1.plot.scatter(x = 'xw', y = 'yh', ax = ax1, alpha = 0.8, marker = '.', 

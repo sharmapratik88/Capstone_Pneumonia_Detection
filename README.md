@@ -23,7 +23,7 @@ In this capstone project, the goal is to build a pneumonia detection system, to 
 * Visualize some random masks generated
 
 **Outcome**
-* [EDA & Data Prep: Jupyter Notebook Link](https://nbviewer.jupyter.org/github/sharmapratik88/Capstone_Pneumonia_Detection/blob/master/Pneumonia_Detection_EDA_%26_Data_Prep.ipynb) containing the exploration steps.
-* [EDA & Data Prep: Module Link](https://github.com/sharmapratik88/Capstone_Pneumonia_Detection/blob/master/module_eda.py) contains custom module which was built to help in performing EDA.
-* [EDA & Data Prep: Data Generator](https://github.com/sharmapratik88/Capstone_Pneumonia_Detection/blob/master/data_generator.py) contains custom module which was built for data generate and help in visualizing the masks.
-* [EDA: Output (pickle files)](https://github.com/sharmapratik88/Capstone_Pneumonia_Detection/tree/master/output) contains output files such as `train_class_features.pkl` containing metadata features and `train_feature_engineered.pkl` after feature engineering on training dataset.
+* [Jupyter Notebook Link](https://nbviewer.jupyter.org/github/sharmapratik88/Capstone_Pneumonia_Detection/blob/master/Pneumonia_Detection_EDA_%26_Data_Prep.ipynb) containing the exploration steps.
+* [Module Link](https://github.com/sharmapratik88/Capstone_Pneumonia_Detection/blob/master/module/eda.py) contains custom module which was built to help in performing EDA.
+* [Data Generator](https://github.com/sharmapratik88/Capstone_Pneumonia_Detection/blob/master/module/data_generator.py) contains custom module which was built for data generate and help in visualizing the masks.
+* [Output (pickle files)](https://github.com/sharmapratik88/Capstone_Pneumonia_Detection/tree/master/output) contains output files such as `train_class_features.pkl` containing metadata features and `train_feature_engineered.pkl` after feature engineering on training dataset.

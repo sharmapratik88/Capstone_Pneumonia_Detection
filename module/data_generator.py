@@ -3,6 +3,7 @@ import numpy as np, pandas as pd
 import os, random, pydicom, keras
 from skimage.transform import resize
 import matplotlib.pyplot as plt
+import tensorflow as tf
 import cv2
 
 PATH = '/content/drive/My Drive/Pneumonia_Detection/'
@@ -88,6 +89,38 @@ class generator(keras.utils.Sequence):
             return int(np.ceil(len(self.fns)/self.batch_size))
         else:
             return int(len(self.fns)/self.batch_size)
+
+# define iou or jaccard loss function
+def iou_loss(y_true, y_pred):
+    y_true = tf.reshape(y_true, [-1])
+    y_pred = tf.reshape(y_pred, [-1])
+    intersection = tf.reduce_sum(y_true * y_pred)
+    score = (intersection + 1.) / (tf.reduce_sum(y_true) + tf.reduce_sum(y_pred) - intersection + 1.)
+    return 1 - score
+
+# combine bce loss and iou loss
+def iou_bce_loss(y_true, y_pred):
+    return 0.5 * keras.losses.binary_crossentropy(y_true, y_pred) + 0.5 * iou_loss(y_true, y_pred)
+
+# mean iou as a metric
+def mean_iou(y_true, y_pred):
+    y_pred = tf.round(y_pred)
+    intersect = tf.reduce_sum(y_true * y_pred, axis=[1, 2, 3])
+    union = tf.reduce_sum(y_true, axis=[1, 2, 3]) + tf.reduce_sum(y_pred, axis=[1, 2, 3])
+    smooth = tf.ones(tf.shape(intersect))
+    return tf.reduce_mean((intersect + smooth) / (union - intersect + smooth))
+
+# create network and compiler
+model = create_network(input_size = 256, channels = 32, n_blocks = 2, depth = 4)
+model.compile(optimizer = 'adam',
+              loss = iou_bce_loss,
+              metrics = ['accuracy', mean_iou])
+
+# cosine learning rate annealing
+def cosine_annealing(x):
+    lr = 0.001
+    epochs = 25
+    return lr*(np.cos(np.pi*x/epochs)+1.)/2
 
 # Function to plot masks that are generated using `generator` function above
 def plot_masks(df, path, image_fns, pneumonia_evidence):

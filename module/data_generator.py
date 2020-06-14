@@ -3,8 +3,15 @@ import numpy as np, pandas as pd
 import os, random, pydicom, keras
 from skimage.transform import resize
 import matplotlib.pyplot as plt
+from tensorflow import keras
 import tensorflow as tf
 import cv2
+
+from skimage import io, measure
+from skimage.transform import resize
+
+from matplotlib import pyplot as plt
+import matplotlib.patches as patches
 
 PATH = '/content/drive/My Drive/Pneumonia_Detection/'
 DATA_DIR = os.path.join(PATH + 'data/')

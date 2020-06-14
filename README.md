@@ -27,3 +27,14 @@ In this capstone project, the goal is to build a pneumonia detection system, to 
 * [Module Link](https://github.com/sharmapratik88/Capstone_Pneumonia_Detection/blob/master/module/eda.py) contains custom module which was built to help in performing EDA.
 * [Data Generator](https://github.com/sharmapratik88/Capstone_Pneumonia_Detection/blob/master/module/data_generator.py) contains custom module which was built for data generate and help in visualizing the masks.
 * [Output (pickle files)](https://github.com/sharmapratik88/Capstone_Pneumonia_Detection/tree/master/output) contains output files such as `train_class_features.pkl` containing metadata features and `train_feature_engineered.pkl` after feature engineering on training dataset.
+
+### 📈 Step 2: Model Building
+* Split the data
+* Use DenseNet-121 architecture
+* Evaluate the model
+* Model Tuning (WIP)
+
+** Outcome**
+* [Jupyter Notebook Link](https://nbviewer.jupyter.org/github/sharmapratik88/Capstone_Pneumonia_Detection/blob/master/Pneumonia_Detection_Model_DenseNet121.ipynb) with the DenseNet-121 architecture with pretrained ImageNet weights trained on RSNA Pneumonia Detection dataset.
+* [Module Link](https://github.com/sharmapratik88/Capstone_Pneumonia_Detection/blob/master/module/densenet121.py) contains custom module which was built to help in model building.
+* [Output (pickle files)](https://github.com/sharmapratik88/Capstone_Pneumonia_Detection/tree/master/output) contains train, valid and test pickle files after split on training dataset.

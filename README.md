@@ -35,6 +35,9 @@ In this capstone project, the goal is to build a pneumonia detection system, to 
 * Model Tuning (WIP)
 
 **Outcome**
-* [Jupyter Notebook Link](https://nbviewer.jupyter.org/github/sharmapratik88/Capstone_Pneumonia_Detection/blob/master/Pneumonia_Detection_Model_DenseNet121.ipynb) with the DenseNet-121 architecture with pretrained ImageNet weights trained on RSNA Pneumonia Detection dataset.
+* [Jupyter Notebook Link](https://nbviewer.jupyter.org/github/sharmapratik88/Capstone_Pneumonia_Detection/blob/master/Pneumonia_Classification_Model.ipynb) with the DenseNet-121 architecture with pretrained ImageNet weights trained on RSNA Pneumonia Detection dataset. Evaluating the model on average precision, accuracy and ROC AUC. Also compared the DenseNet-121 output with the pretrained CheXNet weights.
 * [Module Link](https://github.com/sharmapratik88/Capstone_Pneumonia_Detection/blob/master/module/densenet121.py) contains custom module which was built to help in model building.
 * [Output (pickle files)](https://github.com/sharmapratik88/Capstone_Pneumonia_Detection/tree/master/output) contains train, valid and test pickle files after split on training dataset.
+
+### Acknowledgments
+* We used pre-trained weights available from the following [repository](https://github.com/brucechou1983/CheXNet-Keras).

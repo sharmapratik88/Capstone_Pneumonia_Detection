@@ -31,8 +31,8 @@ In this capstone project, the goal is to build a pneumonia detection system, to 
 ### ⚙️ Step 2: Model Building
 * Split the data
 * Use DenseNet-121 architecture
-* Evaluate the model
-* Model Tuning (WIP)
+* Make use of pre-trained CheXNet weights and train the model
+* Evaluate the models (ROC AUC, AP, F1 Score)
 
 **Outcome**
 * [Jupyter Notebook Link](https://nbviewer.jupyter.org/github/sharmapratik88/Capstone_Pneumonia_Detection/blob/master/Pneumonia_Classification_Model.ipynb) with the DenseNet-121 architecture with pretrained ImageNet weights trained on RSNA Pneumonia Detection dataset. Evaluating the model on average precision, accuracy and ROC AUC. Also compared the DenseNet-121 output with the pretrained CheXNet weights.
